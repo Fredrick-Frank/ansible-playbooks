@@ -1,0 +1,21 @@
+---
+- name: Make users and install packages
+  hosts: all
+  vars:
+   users:
+    - AAP1
+    - AAP2
+    - AAP3
+   packages:
+    - httpd
+    - firewalld
+  tasks: 
+   - name: Create a username
+     user: 
+      name: "{{ item }}"
+      state: present
+    loop: "{{ users }}"
+   - name: Install the packages
+     yum:
+      name: "{{ packages }}"
+      state: present
