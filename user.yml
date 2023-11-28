@@ -3,18 +3,23 @@
   hosts: all
   vars:
    users:
-    - AAP1
-    - AAP2
-    - AAP3
+    - username: ops1
+      groups: webadmin
+    - username: ops2
+      groups: webadmin
    packages:
     - httpd
     - firewalld
   tasks: 
-   - name: Create a username
-     user: 
-      name: "{{ item }}"
+   - name: Create a group
+     group: 
+      name: webadmin
       state: present
-    loop: "{{ users }}"
+   - name: Create user accounts
+     user:
+      name: "{{ item.username }}"
+      groups: webadmin
+     loop: "{{ users }}" 
    - name: Install the packages
      yum:
       name: "{{ packages }}"
