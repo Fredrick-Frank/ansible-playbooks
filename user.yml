@@ -1,6 +1,6 @@
 ---
 - name: Make users and install packages
-  hosts: 192.168.5.52
+  hosts: 192.168.6.15
   vars:
    users:
     - username: ops1
